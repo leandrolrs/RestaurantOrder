@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestaurantOrder.Business;
 using RestaurantOrder.Models;
 
 namespace RestaurantOrder.Controllers
@@ -12,10 +13,12 @@ namespace RestaurantOrder.Controllers
     {
 
         private readonly OrderContext _context;
+        private readonly IOrderManager _orderManager;
 
-        public OrderController(OrderContext context)
+        public OrderController(OrderContext context, IOrderManager orderManager)
         {
             _context = context;
+            _orderManager = orderManager;
         }
 
         public async Task<IActionResult> Index()
@@ -37,6 +40,17 @@ namespace RestaurantOrder.Controllers
         {
             if (ModelState.IsValid)
             {
+                var orderParams = orderHistory.Input.Split(',');
+
+                try
+                {
+                    orderHistory.Output = _orderManager.GetOrder(orderParams);
+                }
+                catch (Exception)
+                {
+                    orderHistory.Output = "Invalid request.";
+                }
+
                 if (orderHistory.Id == 0)
                     _context.Add(orderHistory);
                 else

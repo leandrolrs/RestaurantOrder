@@ -2,7 +2,7 @@
 
 namespace RestaurantOrder.Rules
 {
-    interface IOrderTypeRule
+    public interface IOrderTypeRule
     {
         void GetOrder(Order order);
     }

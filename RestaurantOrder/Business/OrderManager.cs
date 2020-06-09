@@ -8,9 +8,14 @@ using System.Text;
 
 namespace RestaurantOrder.Business
 {
-    public class OrderFood
+    public class OrderManager: IOrderManager
     {
         List<IOrderTypeRule> _rules = new List<IOrderTypeRule>();
+
+        public OrderManager()
+        {
+            
+        }
 
         public string GetOrder(string[] orderParams)
         {

@@ -1,6 +1,6 @@
 ﻿namespace RestaurantOrder.Business
 {
-    interface IOrderFood
+    public interface IOrderManager
     {
         string GetOrder(string[] orderParams);
     }

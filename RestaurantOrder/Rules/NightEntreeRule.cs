@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RestaurantOrder.Rules
 {
-    class NightEntreeRule :IOrderTypeRule
+    public class NightEntreeRule :IOrderTypeRule
     {
         public void GetOrder(Order order)
         {

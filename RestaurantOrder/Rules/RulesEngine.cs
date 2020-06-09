@@ -1,12 +1,11 @@
 ﻿using RestaurantOrder.Enumerations;
 using RestaurantOrder.Domain;
 using System.Collections.Generic;
-using System.Linq;
 
 
 namespace RestaurantOrder.Rules
 {
-    class RulesEngine
+    public class RulesEngine
     {
         public static List<IOrderTypeRule> GetRules(Order order)
         {

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace RestaurantOrder.Rules
 {
-    class InvalidSelectionRule : IOrderTypeRule
+    public class InvalidSelectionRule : IOrderTypeRule
     {
         public void GetOrder(Order order)
         {
