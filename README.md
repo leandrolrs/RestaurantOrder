@@ -1,5 +1,19 @@
 # RestaurantOrder
 
+
+First of all, change the connection string
+
+```sh
+   "ConnectionStrings": {
+    "DevConnection": "Server=(localdb)\\MyInstance;Integrated Security=true;"
+  }
+```
+
+After that, update database in Package Manager Console
+```sh
+   Update-Database
+```
+
 We are expecting to evaluate follow criteria:
 1. Object Oriented Design
 2. Respect SOLID Principles
