@@ -65,7 +65,6 @@ namespace RestaurantOrder.Controllers
 
         public IActionResult Delete(int id)
         {
-            var employee = _orderManager.GetOrderByID(id);
             _orderManager.DeleteOrder(id);
             return RedirectToAction(nameof(Index));
         }
