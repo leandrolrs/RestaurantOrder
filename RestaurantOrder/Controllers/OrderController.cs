@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantOrder.Business;
 using RestaurantOrder.Models;
+using RestaurantOrder.Utils;
 
 namespace RestaurantOrder.Controllers
 {
@@ -22,6 +23,21 @@ namespace RestaurantOrder.Controllers
             return View(_orderManager.GetOrders().ToList());
         }
 
+        [HttpGet]
+        public JsonResult GetOrderOutput(string input)
+        {
+            var orderParams = input.Split(',');
+
+            try
+            {
+                return Json(new OrderUtils().GetOrderOutput(orderParams));
+            }
+            catch (Exception)
+            {
+                return Json("Invalid request.");
+            }
+        }
+
         public IActionResult AddOrEdit(int id = 0)
         {
             if (id == 0)
@@ -36,16 +52,7 @@ namespace RestaurantOrder.Controllers
         {
             if (ModelState.IsValid)
             {
-                var orderParams = order.Input.Split(',');
-
-                try
-                {
-                    order.Output = _orderManager.GetOrderOutput(orderParams);
-                }
-                catch (Exception)
-                {
-                    order.Output = "Invalid request.";
-                }
+                //order.Output = GetOrderOutput(order.Input);
 
                 if (order.Id == 0)
                     _orderManager.InsertOrder(order);

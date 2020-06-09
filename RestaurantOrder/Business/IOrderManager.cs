@@ -5,8 +5,6 @@ namespace RestaurantOrder.Business
 {
     public interface IOrderManager
     {
-        string GetOrderOutput(string[] orderParams);
-
         IEnumerable<Order> GetOrders();
         Order GetOrderByID(int id);
         void InsertOrder(Order order);

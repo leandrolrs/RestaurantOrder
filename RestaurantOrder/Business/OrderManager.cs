@@ -53,9 +53,5 @@ namespace RestaurantOrder.Business
             _orderRepository.Save();
         }
 
-        public string GetOrderOutput(string[] orderParams)
-        {
-            return new OrderUtils().GetOrderOutput(orderParams);
-        }
     }
 }
