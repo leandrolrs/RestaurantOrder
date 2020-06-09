@@ -8,7 +8,7 @@ namespace RestaurantOrder.Rules
 {
     public class MorningDrinkRule : IOrderTypeRule
     {
-        public void GetOrder(Order order)
+        public void GetOrder(OrderDomain order)
         {
             var drinkQuery = order.DishTypes.Where(x => x == DishType.Drink);
 

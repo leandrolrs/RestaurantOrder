@@ -4,6 +4,6 @@ namespace RestaurantOrder.Rules
 {
     public interface IOrderTypeRule
     {
-        void GetOrder(Order order);
+        void GetOrder(OrderDomain order);
     }
 }

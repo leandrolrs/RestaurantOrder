@@ -7,7 +7,7 @@ namespace RestaurantOrder.Rules
 {
     public class RulesEngine
     {
-        public static List<IOrderTypeRule> GetRules(Order order)
+        public static List<IOrderTypeRule> GetRules(OrderDomain order)
         {
             List<IOrderTypeRule> _rules = new List<IOrderTypeRule>();            
 

@@ -8,7 +8,7 @@ namespace RestaurantOrder.Rules
 {
     public class MorningEntreeRule : IOrderTypeRule
     {
-        public void GetOrder(Order order)
+        public void GetOrder(OrderDomain order)
         {
             List<string> entreeItems = new List<string>() { FoodItems.Eggs.ToString() };
 

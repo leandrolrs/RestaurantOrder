@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RestaurantOrder.Models;
+using RestaurantOrder.Repository;
 
 namespace RestaurantOrder.Migrations
 {
@@ -18,7 +18,7 @@ namespace RestaurantOrder.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RestaurantOrder.Models.OrderHistory", b =>
+            modelBuilder.Entity("RestaurantOrder.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,7 +34,7 @@ namespace RestaurantOrder.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderHistories");
+                    b.ToTable("Orders");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,7 @@ namespace RestaurantOrder.Rules
 {
     public class MorningSideRule : IOrderTypeRule
     {
-        public void GetOrder(Order order)
+        public void GetOrder(OrderDomain order)
         {
             List<string> sideItems = new List<string>() { FoodItems.Toast.ToString() };
 

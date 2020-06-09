@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestaurantOrder.Models;
 
-namespace RestaurantOrder.Models
+namespace RestaurantOrder.Repository
 {
     public class OrderContext : DbContext
     {
@@ -8,6 +9,6 @@ namespace RestaurantOrder.Models
         {
         }
 
-        public DbSet<OrderHistory> OrderHistories { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

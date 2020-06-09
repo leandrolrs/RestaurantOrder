@@ -7,7 +7,7 @@ namespace RestaurantOrder.Rules
 {
     public class NightEntreeRule :IOrderTypeRule
     {
-        public void GetOrder(Order order)
+        public void GetOrder(OrderDomain order)
         {
             List<string> entreeItems = new List<string>() { FoodItems.Steak.ToString() };
 

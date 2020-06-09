@@ -2,7 +2,7 @@
 
 namespace RestaurantOrder.Domain
 {
-    public class OrderItem
+    public class OrderItemDomain
     {
         public DishType DishType { get; set; }
         public TimeOfDay TimeOfDay { get; set; }

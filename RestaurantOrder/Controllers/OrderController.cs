@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using RestaurantOrder.Business;
 using RestaurantOrder.Models;
 
@@ -12,61 +9,56 @@ namespace RestaurantOrder.Controllers
     public class OrderController : Controller
     {
 
-        private readonly OrderContext _context;
         private readonly IOrderManager _orderManager;
 
-        public OrderController(OrderContext context, IOrderManager orderManager)
+        public OrderController(IOrderManager orderManager)
         {
-            _context = context;
             _orderManager = orderManager;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.OrderHistories.ToListAsync());
+            return View(_orderManager.GetOrders().ToList());
         }
 
         public IActionResult AddOrEdit(int id = 0)
         {
             if (id == 0)
-                return View(new OrderHistory());
+                return View(new Order());
             else
-                return View(_context.OrderHistories.Find(id));
+                return View(_orderManager.GetOrderByID(id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit([Bind("Id,Input,Output")] OrderHistory orderHistory)
+        public IActionResult AddOrEdit([Bind("Id,Input,Output")] Order order)
         {
             if (ModelState.IsValid)
             {
-                var orderParams = orderHistory.Input.Split(',');
+                var orderParams = order.Input.Split(',');
 
                 try
                 {
-                    orderHistory.Output = _orderManager.GetOrder(orderParams);
+                    order.Output = _orderManager.GetOrderOutput(orderParams);
                 }
                 catch (Exception)
                 {
-                    orderHistory.Output = "Invalid request.";
+                    order.Output = "Invalid request.";
                 }
 
-                if (orderHistory.Id == 0)
-                    _context.Add(orderHistory);
+                if (order.Id == 0)
+                    _orderManager.InsertOrder(order);
                 else
-                    _context.Update(orderHistory);
-                await _context.SaveChangesAsync();
+                    _orderManager.UpdateOrder(order);
                 return RedirectToAction(nameof(Index));
             }
-            return View(orderHistory);
+            return View(order);
         }
 
-        // GET: Employee/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            var employee = await _context.OrderHistories.FindAsync(id);
-            _context.OrderHistories.Remove(employee);
-            await _context.SaveChangesAsync();
+            var employee = _orderManager.GetOrderByID(id);
+            _orderManager.DeleteOrder(id);
             return RedirectToAction(nameof(Index));
         }
     }

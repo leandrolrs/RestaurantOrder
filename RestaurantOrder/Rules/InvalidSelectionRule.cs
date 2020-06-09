@@ -6,7 +6,7 @@ namespace RestaurantOrder.Rules
 {
     public class InvalidSelectionRule : IOrderTypeRule
     {
-        public void GetOrder(Order order)
+        public void GetOrder(OrderDomain order)
         {
             if (order.DishTypes.Where(x => x == DishType.Invalid).Count() > 0)
             {

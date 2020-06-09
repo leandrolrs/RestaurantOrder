@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestaurantOrder.Models
 {
-    public class OrderHistory
+    public class Order
     {
         [Key]
         public int Id { get; set; }

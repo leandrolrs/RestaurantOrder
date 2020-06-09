@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RestaurantOrder.Domain
 {
-    public class Order
+    public class OrderDomain
     {
         public List<DishType> DishTypes { get; set; }
 

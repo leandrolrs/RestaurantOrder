@@ -1,5 +1,7 @@
 ﻿using RestaurantOrder.Domain;
 using RestaurantOrder.Enumerations;
+using RestaurantOrder.Models;
+using RestaurantOrder.Repository;
 using RestaurantOrder.Rules;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,18 @@ namespace RestaurantOrder.Business
     {
         List<IOrderTypeRule> _rules = new List<IOrderTypeRule>();
 
-        public OrderManager()
+        private readonly IOrderRepository _orderRepository;
+
+        public OrderManager(IOrderRepository orderRepository)
         {
-            
+            _orderRepository = orderRepository;
+
         }
 
-        public string GetOrder(string[] orderParams)
+        public string GetOrderOutput(string[] orderParams)
         {
 
-            Order order = BuildOrder(orderParams);
+            OrderDomain order = BuildOrder(orderParams);
 
             _rules = RulesEngine.GetRules(order);
 
@@ -39,7 +44,7 @@ namespace RestaurantOrder.Business
             return orderOutput;
         }
 
-        private string GenerateFormattedOutput(Order order)
+        private string GenerateFormattedOutput(OrderDomain order)
         {
             StringBuilder formattedStringOutput = new StringBuilder();
 
@@ -67,11 +72,11 @@ namespace RestaurantOrder.Business
             return formattedStringOutput.ToString();
         }
 
-        private Order BuildOrder(string[] orderParams)
+        private OrderDomain BuildOrder(string[] orderParams)
         {
             List<string> lstOrdParams = orderParams.ToList();
 
-            Order inpurOrder = new Order();
+            OrderDomain inpurOrder = new OrderDomain();
 
             TimeOfDay timeOfDay = (TimeOfDay)Enum.Parse(typeof(TimeOfDay), lstOrdParams[0].ToUpper());
 
@@ -108,6 +113,34 @@ namespace RestaurantOrder.Business
             }
 
             return inpurOrder;
+        }
+
+        public IEnumerable<Order> GetOrders()
+        {
+            return _orderRepository.GetOrders();
+        }
+
+        public Order GetOrderByID(int id)
+        {
+            return _orderRepository.GetOrderByID(id);
+        }
+
+        public void InsertOrder(Order order)
+        {
+            _orderRepository.InsertOrder(order);
+            _orderRepository.Save();
+        }
+
+        public void DeleteOrder(int id)
+        {
+            _orderRepository.DeleteOrder(id);
+            _orderRepository.Save();
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            _orderRepository.UpdateOrder(order);
+            _orderRepository.Save();
         }
     }
 }

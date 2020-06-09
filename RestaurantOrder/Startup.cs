@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantOrder.Business;
 using RestaurantOrder.Models;
+using RestaurantOrder.Repository;
 
 namespace RestaurantOrder
 {
@@ -34,7 +35,7 @@ namespace RestaurantOrder
             services.AddDbContext<OrderContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
-
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IOrderManager, OrderManager>();
         }
 

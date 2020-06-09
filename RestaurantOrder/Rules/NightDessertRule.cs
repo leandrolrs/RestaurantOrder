@@ -9,7 +9,7 @@ namespace RestaurantOrder.Rules
     public class NightDessertRule : IOrderTypeRule
     {
 
-        public void GetOrder(Order order)
+        public void GetOrder(OrderDomain order)
         {
             List<string> dessertItems = new List<string>() { FoodItems.Cake.ToString() };
 

@@ -7,7 +7,7 @@ namespace RestaurantOrder.Rules
 {
     public class NightSideRule : IOrderTypeRule
     {
-        public void GetOrder(Order order)
+        public void GetOrder(OrderDomain order)
         {
             var sidesQuery = order.DishTypes.Where(x => x == DishType.Side);
 
