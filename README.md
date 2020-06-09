@@ -1,4 +1,4 @@
-# RestaurantOrder
+# Restaurant Order
 
 
 First of all, change the connection string
