@@ -1,3 +1,5 @@
 /.vs
 /RestaurantOrder/bin
 /RestaurantOrder/obj
+/RestaurantOrderTests/obj
+/RestaurantOrderTests/bin
